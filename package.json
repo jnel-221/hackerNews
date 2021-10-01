@@ -1,0 +1,19 @@
+{
+  "name": "hackernews",
+  "version": "1.0.0",
+  "description": "A news searching app using JS and ReactJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jnel-221/hackerNews.git"
+  },
+  "author": "J Nelson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jnel-221/hackerNews/issues"
+  },
+  "homepage": "https://github.com/jnel-221/hackerNews#readme"
+}
