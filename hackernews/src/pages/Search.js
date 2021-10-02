@@ -36,7 +36,6 @@ function Search() {
   }
 
   function setStorage(array) {
-    // let storedHistory = JSON.parse(sessionStorage.getItem("searchHistory"))|| [];
     let json = JSON.stringify(array);
 
     console.log("setStorage history arr to string contains ", json);
