@@ -3,6 +3,8 @@ import Headernav from "../components/HeaderNav";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
 import axios from "axios";
 import Cards from "../components/Card";
+import FormatDate from "../utils/helpers/formatDate.js";
+
 
 function Search() {
   const [search, setSearch] = useState("");
@@ -53,7 +55,7 @@ function Search() {
             title: story.title,
             author: story.author,
             url: story.url,
-            date: story.created_at,
+            date: FormatDate(story.created_at),
         };
         
     }))
