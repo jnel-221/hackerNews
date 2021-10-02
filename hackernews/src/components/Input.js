@@ -2,15 +2,11 @@ import React from "react";
 import{InputGroup, FormControl, Button} from "react-bootstrap";
 
 
-function Input(){
+function Input({handleSubmit, handleChange}){
 
-    function handleSubmit(e){
-        e.preventDefault();
-        console.log("You clicked submit!")
-    }
 
     return(
-    <InputGroup className="mt-3 mx-auto">
+    <InputGroup className="mt-3 mx-auto" id="search-term" onChange={handleChange}>
     <FormControl
       placeholder="Search for Articles"
       aria-label="Search for Articles"
