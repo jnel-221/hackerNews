@@ -4,6 +4,7 @@ import{Navbar, Nav, Container} from "react-bootstrap";
 
 function Headernav(){
     return(
+        
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
             <Navbar.Brand as={Link} to="/">Hacker News</Navbar.Brand>
