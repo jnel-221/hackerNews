@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Headernav from "../components/HeaderNav";
-// import Input from "../components/Input";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
-
 import axios from "axios";
+import Cards from "../components/Card";
 
 function Search() {
   const [search, setSearch] = useState("");
-  const [history, setHistory] = useState([]);
   const [results, setResults] = useState([]);
+  const [history, setHistory] = useState([]);
+  
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,26 +19,51 @@ function Search() {
       axios
         .get(`http://hn.algolia.com/api/v1/search?query=${search}&tags=story`)
         .then((res) => {
-          const stuff = res.data.hits;
-          console.log("api call returned ", stuff);
+          const stories = res.data.hits;
+          
+          setResults(stories);
+          setResults((stories)=>{
+              console.log("updater ",stories)
+              return stories;
+          });
+          parseHistory(stories);
+          
         });
     } else {
       console.log("enter search term to get results");
     }
 
     setHistory((history) => [...history, search]);
+    setHistory((history) => {
+        return history;
+    })
     setStorage(history);
+   
     console.log(
       "handleSubmit history ",
       history,
       ` history is ${history.length} items long`
     );
+   
   }
+
+  function parseHistory(arr){
+    setResults(arr.map((story)=> {
+        return{
+            title: story.title,
+            author: story.author,
+            url: story.url,
+            date: story.created_at,
+        };
+        
+    }))
+  }
+  console.log("parseHistory: ", results);
 
   function setStorage(array) {
     let json = JSON.stringify(array);
-
     console.log("setStorage history arr to string contains ", json);
+    sessionStorage.setItem("searchHistory",json);
   }
 
 //   function handleChange(e) {
@@ -49,7 +74,6 @@ function Search() {
   return (
     <>
       <Headernav />
-      {/* <h1>Hello World</h1> */}
       <InputGroup
         className="mt-3 mx-auto"
         id="search-term"
@@ -71,7 +95,8 @@ function Search() {
         </Button>
       </InputGroup>
       <p>Hey, looks like you're searching for {search}!</p>
-      {/* <p> Hey, look at our search array {history}</p> */}
+
+      <Cards results={results}/>
     </>
   );
 }
