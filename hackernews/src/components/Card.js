@@ -9,7 +9,9 @@ function Cards({ results }) {
           <Card.Body>
             <Card.Title>{result.title}</Card.Title>
             <Card.Subtitle>by {result.author}</Card.Subtitle>
-            <Card.Subtitle className="mt-1">created {result.date}</Card.Subtitle>
+            <Card.Subtitle className="mt-1">
+              created {result.date}
+            </Card.Subtitle>
             <Card.Link href={result.url} target="_blank">
               View Story
             </Card.Link>

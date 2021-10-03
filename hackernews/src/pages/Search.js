@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef} from "react";
 import Headernav from "../components/HeaderNav";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
 import axios from "axios";
@@ -6,14 +6,13 @@ import Cards from "../components/Card";
 import FormatDate from "../utils/helpers/formatDate.js";
 
 function Search() {
-
   const search = useRef(null);
   const [results, setResults] = useState([]);
 
   function handleSubmit(e) {
     e.preventDefault();
     let query = search.current.value.trim();
-   
+
     if (search !== "") {
       axios
         .get(`http://hn.algolia.com/api/v1/search?query=${query}&tags=story`)
@@ -51,18 +50,13 @@ function Search() {
       history = [query, ...history];
 
       sessionStorage.setItem("mySearches", JSON.stringify(history));
-      console.log("useEffect history has what: ", history);
     }
   }
 
   return (
     <>
       <Headernav />
-      <InputGroup
-        className="mt-3 mb-4 mx-auto"
-        id="search-term"
-        value={search}
-      >
+      <InputGroup className="mt-3 mb-4 mx-auto" id="search-term" value={search}>
         <FormControl
           placeholder="Search for Articles"
           aria-label="Search for Articles"
