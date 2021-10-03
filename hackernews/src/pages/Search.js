@@ -6,7 +6,7 @@ import Cards from "../components/Card";
 import FormatDate from "../utils/helpers/formatDate.js";
 
 function Search() {
-  
+
   const search = useRef(null);
   const [results, setResults] = useState([]);
 
@@ -48,7 +48,7 @@ function Search() {
   function setStorage(query) {
     let history = JSON.parse(sessionStorage.getItem("mySearches")) || [];
     if (query !== "") {
-      history = [...history, query];
+      history = [query, ...history];
 
       sessionStorage.setItem("mySearches", JSON.stringify(history));
       console.log("useEffect history has what: ", history);
