@@ -5,7 +5,7 @@ function Cards({ results }) {
   return (
     <>
       {results.map((result, i) => (
-        <Card className="my-3" key={i}>
+        <Card className="m-3" key={i}>
           <Card.Body>
             <Card.Title>{result.title}</Card.Title>
             <Card.Subtitle>by {result.author}</Card.Subtitle>
