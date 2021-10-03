@@ -4,6 +4,7 @@ import { InputGroup, FormControl, Button } from "react-bootstrap";
 import axios from "axios";
 import Cards from "../components/Card";
 import FormatDate from "../utils/helpers/formatDate.js";
+import setStorage from "../utils/helpers/setStorage.js";
 
 function Search() {
   const search = useRef(null);
@@ -44,14 +45,7 @@ function Search() {
     );
   }
 
-  function setStorage(query) {
-    let history = JSON.parse(sessionStorage.getItem("mySearches")) || [];
-    if (query !== "") {
-      history = [query, ...history];
 
-      sessionStorage.setItem("mySearches", JSON.stringify(history));
-    }
-  }
 
   return (
     <>
