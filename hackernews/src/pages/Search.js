@@ -6,51 +6,14 @@ import Cards from "../components/Card";
 import FormatDate from "../utils/helpers/formatDate.js";
 
 function Search() {
-  // const [search, setSearch] = useState("");
- //above hook commented out; trying useRef hook to resolve iterative-string-saving bug.
-
+  
   const search = useRef(null);
-
   const [results, setResults] = useState([]);
 
-//below hook commented out; replacing w/useEffect hook to store search terms as they're captured in 'handleSubmit'.
-//   const [history, setHistory] = useState([]);
-
-//first draft, saving for reference until all storing bugs resolved.
-//  useEffect(function storeSearch(){
-//     let history = JSON.parse(sessionStorage.getItem("mySearches"))||[];
-     
-//     if(search !== ""){
-        
-//         history = [...history, search];
-
-//         sessionStorage.setItem("mySearches",JSON.stringify(history))
-//         console.log("useEffect history has what: ", history);
-//     }
-
-//   })
-
-
-//second draft: iterative-string-saving bug resolved, but replaced with string-saved-twice-on-handleSubmit bug.
-   useEffect(()=>{
-    let history = JSON.parse(sessionStorage.getItem("mySearches"))||[];
-    let query = search.current.value.trim();
-        if(query !== ""){
-            
-            history = [...history, query];
-    
-            sessionStorage.setItem("mySearches",JSON.stringify(history))
-            console.log("useEffect history has what: ", history);
-        }
-   })
-
- 
   function handleSubmit(e) {
     e.preventDefault();
     let query = search.current.value.trim();
-    console.log("handleSubmit; ref hook working? ",query);
-    
-    // setSearch(e.target.value.trim());    
+   
     if (search !== "") {
       axios
         .get(`http://hn.algolia.com/api/v1/search?query=${query}&tags=story`)
@@ -61,18 +24,15 @@ function Search() {
           setResults((stories) => {
             return stories;
           });
-          parseHistory(stories);
+          parseResults(stories);
         });
     } else {
       console.log("enter search term to get results");
     }
-    
+    setStorage(query);
   }
-  
 
-  
-
-  function parseHistory(arr) {
+  function parseResults(arr) {
     setResults(
       arr.map((story) => {
         return {
@@ -85,6 +45,15 @@ function Search() {
     );
   }
 
+  function setStorage(query) {
+    let history = JSON.parse(sessionStorage.getItem("mySearches")) || [];
+    if (query !== "") {
+      history = [...history, query];
+
+      sessionStorage.setItem("mySearches", JSON.stringify(history));
+      console.log("useEffect history has what: ", history);
+    }
+  }
 
   return (
     <>
@@ -93,7 +62,6 @@ function Search() {
         className="mt-3 mb-4 mx-auto"
         id="search-term"
         value={search}
-        // onClick={(e) => setSearch(e.target.value.trim())}
       >
         <FormControl
           placeholder="Search for Articles"
@@ -110,8 +78,6 @@ function Search() {
           Search
         </Button>
       </InputGroup>
-      {/* <p>Hey, looks like you're searching for {search}!</p> */}
-
       <Cards results={results} />
     </>
   );
