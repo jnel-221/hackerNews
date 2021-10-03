@@ -8,7 +8,7 @@ function History(){
     const [list] = useState(()=>{
         const saved = sessionStorage.getItem("mySearches");
         const savedSearches = JSON.parse(saved);
-        return savedSearches|| [];
+        return savedSearches || [];
     })
 
      console.log("stored array values: ",list);
@@ -16,7 +16,6 @@ function History(){
         <>
         <Headernav/>
         <h1 className="m-3">Search History</h1>
-        <p>Where's your history?</p>
         <List savedSearches={list}/>
         </>
     );
