@@ -15,7 +15,7 @@ function Search() {
     e.preventDefault();
     let query = search.current.value.trim();
 
-    if (search !== "") {
+    if (query !== ""){
       axios
         .get(`http://hn.algolia.com/api/v1/search?query=${query}&tags=story`)
         .then((res) => {
@@ -28,7 +28,7 @@ function Search() {
           parseResults(stories);
         });
     } else {
-      console.log("enter search term to get results");
+      alert("Please enter search terms to get results")
     }
     setStorage(query);
     clearState(); 

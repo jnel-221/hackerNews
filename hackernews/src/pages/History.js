@@ -13,7 +13,7 @@ function History() {
   return (
     <>
       <Headernav />
-      <h1 className="m-3">Search History</h1>
+      <h2 className="m-3">Search History</h2>
       <List savedSearches={list} />
     </>
   );
