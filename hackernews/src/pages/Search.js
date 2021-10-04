@@ -15,7 +15,7 @@ function Search() {
     e.preventDefault();
     let query = search.current.value.trim();
 
-    if (query !== ""){
+    if (query !== "") {
       axios
         .get(`https://hn.algolia.com/api/v1/search?query=${query}&tags=story`)
         .then((res) => {
@@ -28,10 +28,10 @@ function Search() {
           parseResults(stories);
         });
     } else {
-      alert("Please enter search terms to get results")
+      alert("Please enter search terms to get results");
     }
     setStorage(query);
-    clearState(); 
+    clearState();
   }
 
   function parseResults(arr) {
@@ -47,26 +47,35 @@ function Search() {
     );
   }
 
-  function clearState(){
+  function clearState() {
     setValue("");
   }
 
+  function handleKeypress(e) {
+    if (e.charCode === 13) {
+      handleSubmit(e);
+    }
+  }
   return (
     <>
       <Headernav />
-      <InputGroup className="mt-3 mb-4 px-5" id="search-term">
+      <InputGroup
+        className="mt-3 mb-4 px-5"
+        id="search-term"
+        onKeyPress={handleKeypress}
+      >
         <FormControl
           placeholder="Search for Articles"
           aria-label="Search for Articles"
           aria-describedby="basic-addon2"
           value={value}
           ref={search}
-          onChange={e => (setValue(e.target.value.trim()))}
+          onChange={(e) => setValue(e.target.value.trim())}
         />
         <Button
           variant="outline-warning"
           id="button-addon2"
-          type="reset"
+          type="submit"
           onClick={handleSubmit}
         >
           Search
