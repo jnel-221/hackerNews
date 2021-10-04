@@ -17,7 +17,7 @@ function Search() {
 
     if (query !== ""){
       axios
-        .get(`http://hn.algolia.com/api/v1/search?query=${query}&tags=story`)
+        .get(`https://hn.algolia.com/api/v1/search?query=${query}&tags=story`)
         .then((res) => {
           const stories = res.data.hits;
 
